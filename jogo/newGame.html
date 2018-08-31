@@ -1,0 +1,46 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>BuilDev</title>
+	
+    <script src="js/phaser.min.js"></script>
+	<script src="js/Fase.js"></script>
+	<script src="js/GameOver.js"></script>
+	
+    <style type="text/css">
+	
+		body{
+			margin:0;
+		}
+		
+    </style>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+    var config = {
+        type: Phaser.AUTO,
+        width: 1024,
+        height: 576,
+        
+		physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
+		
+		scene:  [Fase, GameOver]
+    };
+
+    var game = new Phaser.Game(config);
+	game.scene.start(Fase);
+	
+</script>
+
+</body>
+</html>
