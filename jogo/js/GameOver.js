@@ -9,7 +9,7 @@ class GameOver extends Phaser.Scene{
 	
 	preload ()
 	{
-		this.load.image('gameOver', 'recursos/telaPerguntas.png');
+		this.load.image('gameOver', 'recursos/telaGameOver.png');
 	
 	}
 	
@@ -18,8 +18,7 @@ class GameOver extends Phaser.Scene{
 		
 		this.add.image(512, 288, 'gameOver');
 		
-		const helloButton = this.add.text(100, 100, 'Hello Phaser!', { fill: '#0f0' });
-		helloButton.setInteractive();
+		this.pontosFinais = this.add.text(512, 400, 'Pontos finais:', { fontSize: '32px', fill: '#000' });
 		
 	}
 	
