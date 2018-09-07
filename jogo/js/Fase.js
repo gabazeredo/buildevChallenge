@@ -10,7 +10,7 @@ class Fase extends Phaser.Scene{
 		var timedEvent;
 		var tempo;
 		
-
+		
     }
 	
 	preload () 
@@ -37,19 +37,20 @@ class Fase extends Phaser.Scene{
 
 	create ()
     {
-		
-		
+			
 		this.timedEvent = this.time.delayedCall(2000, this.gameOver, [], this);
-		
 		
 		this.add.image(512, 288, 'ceu');
 		this.add.image(512, 288, 'predios');
 		this.add.image(512, 335, 'placa');
 		this.add.image(512, 288, 'arbusto');
 		
+		
+		
 		this.platforms = this.physics.add.staticGroup();
 		
 		this.platforms.create(512, 544, 'chao');
+		
 		this.add.image(512, 450, 'fundo');
 		this.add.image(512, 325, 'fundo2');
 		this.add.image(512, 200, 'fundo3');
@@ -108,15 +109,17 @@ class Fase extends Phaser.Scene{
 		this.physics.add.collider(this.player, this.computador, this.arrumar);
 		this.physics.add.collider(this.player, this.platforms);
 		this.cursors = this.input.keyboard.createCursorKeys();
+
     }
 	
 	arrumar(){
+	
+		game.scene.switch('Fase', 'TelaPerguntas');
+	
+	}
+		
 		
 	
-			game.scene.switch('Fase', 'TelaPerguntas');
-		
-		
-	}
 	
 	gameOver(){
 		
@@ -154,6 +157,8 @@ class Fase extends Phaser.Scene{
 			{
 				this.player.setVelocityY(-330);
 			}
+			
+			
 	
     }
 }
