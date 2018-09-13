@@ -1,13 +1,3 @@
-<?php  
-
-session_start();
-include_once("includes/cadastro.php");
-include_once("includes/verifica_login.php");
-
-
-
-?>
-
 
 <html>
 
@@ -30,7 +20,7 @@ include_once("includes/verifica_login.php");
 
 <body class=" text-center">
 
-	<form class="form-signin" method="post" action="index.php">
+	<form class="form-signin"  action="index.php">
       
 	  <img class="mb-4" src="imgs/logo.jpg" alt="" width="72" height="72">
     
@@ -46,7 +36,9 @@ include_once("includes/verifica_login.php");
           <input type="checkbox" value="remember-me"> Lembrar do e-mail
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+		<a href="jogo/js/menu.html"> Entrar</a></br>
+		<a href="cad.php"> Cadastro </a>
+
       <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
     
 	</form>

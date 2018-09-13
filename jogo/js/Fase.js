@@ -7,6 +7,7 @@ class Fase extends Phaser.Scene{
 		var vida;
 		var score = 0;
 		var scoreText;
+		var placa;
 		var timedEvent;
 		var tempo;
 		
@@ -16,11 +17,11 @@ class Fase extends Phaser.Scene{
 	preload () 
 	{
 	
-		this.load.image('ceu', 'recursos/ceu.png');
+		this.load.image('ceu', 'recursos/ceu'+Phaser.Math.Between(0, 2)+'.png');
         this.load.image('chao', 'recursos/chao.png');
         this.load.image('predios', 'recursos/predios.png');
 		this.load.image('arbusto', 'recursos/arbusto.png');
-		this.load.image('placa', 'recursos/placa.png');
+		this.load.image('placa', 'recursos/placaBtn.png');
 		this.load.image('computador', 'predio/pc.png');
 		
 		
@@ -38,14 +39,13 @@ class Fase extends Phaser.Scene{
 	create ()
     {
 			
-		this.timedEvent = this.time.delayedCall(2000, this.gameOver, [], this);
+		this.timedEvent = this.time.delayedCall(10000, this.gameOver, [], this);
+		this.tempo = this.add.text(512, 32);
 		
 		this.add.image(512, 288, 'ceu');
 		this.add.image(512, 288, 'predios');
-		this.add.image(512, 335, 'placa');
+		this.placa = this.add.sprite(120, 385, 'placa').setInteractive();
 		this.add.image(512, 288, 'arbusto');
-		
-		
 		
 		this.platforms = this.physics.add.staticGroup();
 		
@@ -60,26 +60,23 @@ class Fase extends Phaser.Scene{
 		this.platforms.create(512, 263, 'andar');
 		this.platforms.create(512, 138, 'andar');
 		
-		
-		
 		this.add.image(45, 45, 'heart');	
 		this.add.image(90, 45, 'heart');	
 		this.add.image(135, 45, 'heart');
 
-		this.scoreText = this.add.text(950, 35, '0', { fontSize: '32px', fill: '#000' });		
-		this.tempo = this.add.text(512, 32);
 		
 	
 		
 		this.computador = this.physics.add.staticGroup();
 		
+		
 		this.computador.create(605, 475, 'computador');
 		this.computador.create(620, 350, 'computador');
 		this.computador.create(610, 225, 'computador');
-
+	
 		// Jogador
 		
-		this.player = this.physics.add.sprite(250, 480, 'dude');
+		this.player = this.physics.add.sprite(550, 480, 'dude');
 
         this.player.setBounce(0.2);
 		this.player.setCollideWorldBounds(true);
@@ -109,6 +106,8 @@ class Fase extends Phaser.Scene{
 		this.physics.add.collider(this.player, this.computador, this.arrumar);
 		this.physics.add.collider(this.player, this.platforms);
 		this.cursors = this.input.keyboard.createCursorKeys();
+		
+		this.placa.on('pointerdown', () => this.tutorial());
 
     }
 	
@@ -118,21 +117,23 @@ class Fase extends Phaser.Scene{
 	
 	}
 		
-		
-	
-	
 	gameOver(){
 		
-		//game.scene.switch('Fase', 'GameOver');
+		game.scene.switch('Fase', 'GameOver');
 	
 	}
 	
+	tutorial(){
+	
+		game.scene.switch('Fase', 'TelaInstrucoes');
+	
+	}
 		
     update ()
     {
 	
-		
 		this.tempo.setText('Tempo: ' + this.timedEvent.getProgress().toString().substr(0, 4));
+	
 	
 		if (this.cursors.left.isDown)
 			{

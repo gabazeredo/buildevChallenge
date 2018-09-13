@@ -1,8 +1,8 @@
-class GameOver extends Phaser.Scene{
+class TelaParabens extends Phaser.Scene{
 
 	constructor ()
     {
-        super({key: 'GameOver'});
+        super({key: 'TelaParabens'});
 		var cursors;
 		
 	
@@ -10,7 +10,7 @@ class GameOver extends Phaser.Scene{
 	
 	preload ()
 	{
-		this.load.image('gameOver', 'recursos/telaGameover.png');
+		this.load.image('telaGanhou', 'recursos/telaGanhador.png');
 		this.load.image('btnJogarNov', 'recursos/btnJogarNovamente.png');
 		
 		
@@ -20,12 +20,11 @@ class GameOver extends Phaser.Scene{
 	{
 		
 		
-		this.add.image(512, 288, 'gameOver');
+		this.add.image(512, 288, 'telaGanhou');
 		
-		this.btnJogarNov = this.add.sprite(512, 280, 'btnJogarNov').setInteractive();
+		this.btnJogarNov = this.add.sprite(512, 410, 'btnJogarNov').setInteractive();
 		
 		this.btnJogarNov.on('pointerdown', () => this.resetarJogo());
-		
 		
 		
 	}
@@ -35,12 +34,12 @@ class GameOver extends Phaser.Scene{
 		window.location.reload('newGame.php');
 	
 	}
-
+	
 	update ()
 	{
 		
 
 	}
 	
-	
+
 }

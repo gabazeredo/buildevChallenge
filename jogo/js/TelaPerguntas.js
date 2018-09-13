@@ -7,36 +7,61 @@ class TelaPerguntas extends Phaser.Scene{
     {
         super({key: 'TelaPerguntas'});
 		var cursors;
-		var enunciado;
-		this.nQuestao = 3; //Math.floor(Math.random() * 4);
-		
-		this.ver = new Array();
-		
-		this.alternativas = new Array();
-				
-		for(var i = 0; i < respostas.length ; i++){
-		
-			if(respostas[i]["questoes_id"] == (this.nQuestao+1)){
-				
-				this.alternativas.push(respostas[i]["descricao"]);
-				this.ver.push(respostas[i]["status"]);
-			}
-
-		}
-		
 		var timedEvent;
 		var tempo;
 	
+		
+		this.arrayPerguntas = new Array();
+		this.arrayAlternativas = new Array();
+		
+		
+		
+		
+		var enunciado;
+
+		
+		
     }
 	
 	preload ()
 	{
 		this.load.image('telaPerguntas', 'recursos/telaPerguntas.png');
 		this.load.image('btnPer', 'recursos/btnPer.png');
-		this.load.image('btnSair', 'recursos/btnSair.png');
+		
 	
 	}
-	
+	/*
+	buscaPergunta() {
+
+        var xmlhttp = new XMLHttpRequest();
+		
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                
+				objTelPerguntas.arrayPerguntas = JSON.parse(this.responseText);
+            
+			}
+        };
+        xmlhttp.open("GET", "js/buscarPerguntas.php?query=SELECT * FROM questoes", true);
+        xmlhttp.send();
+	}
+	*/
+	buscaAlternativas() {
+
+        var xmlhttp = new XMLHttpRequest();
+		
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+				objTelPerguntas.arrayAlternativas = JSON.parse(this.responseText);
+				objTelPerguntas.enunciado = objTelPerguntas.add.text(70, 70, objTelPerguntas.arrayAlternativas[0].descricao, { fontSize: '32px', fill: '#000' });
+		
+            
+			}
+        };
+        xmlhttp.open("GET", "js/buscarPerguntas.php?query=SELECT * FROM alternativas", true);
+        xmlhttp.send();
+	}
+
 	create ()
 	{
 
@@ -49,45 +74,57 @@ class TelaPerguntas extends Phaser.Scene{
 		this.btnPer2 = this.add.sprite(260, 480, 'btnPer').setInteractive();
 		this.btnPer3 = this.add.sprite(760, 480, 'btnPer').setInteractive();
 		
+		
 		this.btnPer0.on('pointerdown', () => this.verificaResp(0));
 		this.btnPer1.on('pointerdown', () => this.verificaResp(1));
 		this.btnPer2.on('pointerdown', () => this.verificaResp(2));
 		this.btnPer3.on('pointerdown', () => this.verificaResp(3));
 		
+		this.buscaAlternativas();
 		
-		this.enunciado = this.add.text(70, 70, perguntas[3]['enunciado'], { fontSize: '32px', fill: '#000' });
+		debugger;
+		
+		//this.enunciado = this.add.text(70, 70, this.arrayAlternativas[0].descricao, { fontSize: '32px', fill: '#000' });
 		
 		
-		
+		/*
 		var texto0 = this.add.text(90, 350, this.alternativas[0], { fontSize: '24px', fill: '#000' });
 		var texto1 = this.add.text(590, 350, this.alternativas[1], { fontSize: '24px', fill: '#000' });
 		var texto2 = this.add.text(90, 460, this.alternativas[2], { fontSize: '24px', fill: '#000' });
 		var texto3 = this.add.text(590, 460, this.alternativas[3], { fontSize: '24px', fill: '#000' });
-		
+		*/
 		
 	}
 	
 	
 	update ()
 	{
-		
 		this.tempo.setText('Tempo: ' + this.timedEvent.getProgress().toString().substr(0, 4));
+
 
 	}
 	
-	perdePergunta(){
-		
-		alert("Perdeu");
 	
-	}
+	voltarFase(){
+		
+		game.scene.switch('TelaPerguntas', 'Fase');
+	
+	};	
+	
 	
 	verificaResp(id){
 		
-		if(this.ver[id] == 1)
-			alert("certo")
-		else	
-			alert("errado")
-		
+		/*
+		if(this.ver[id] == 1){
+			alert("certo");
+			game.scene.switch('TelaPerguntas', 'Fase');
+			
+			
+		}else{	
+			alert("errado");
+			game.scene.switch('TelaPerguntas', 'Fase');
+		}
+		*/
 	
 	}
 	

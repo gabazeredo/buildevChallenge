@@ -1,10 +1,9 @@
 <?php
 
-function buscaPerguntas($pQuery){
-	
+
 	$conexao = mysqli_connect("localhost", "root", "root", "buildev_db");
 
-	$dados = mysqli_query($conexao, $pQuery) or die("Sua query retornou um erro");
+	$dados = mysqli_query($conexao, $_GET["query"]) or die("Sua query retornou um erro");
 	
 	$arraySelect = array();
 	if ($dados->num_rows > 0) {
@@ -19,9 +18,7 @@ function buscaPerguntas($pQuery){
 	
 	mysqli_close($conexao);
 	
-	return $arraySelect;
-	
-}
+	echo json_encode($arraySelect);
 
 
 

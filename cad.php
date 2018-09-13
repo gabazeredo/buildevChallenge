@@ -1,26 +1,3 @@
-<?php  
-session_start();
-
-include_once("includes/banco_de_dados.php");
-
-if(isset($_POST['inputNome'])){
-
-	$return = select("SELECT * FROM jogadores WHERE email= '{$_POST['inputEmail']}'");
-
-		if($return == 0){
-		
-		
-			$dataReg = date("Y-m-d");
-			$cadastrou = php_insert("INSERT INTO jogadores VALUES (DEFAULT, '{$_POST['inputNome']}', '{$_POST['inputNomeUsu']}', '{$_POST['inputDate']}', {$_POST['inputSenha']}, '{$_POST['inputEmail']}', '{$dataReg}', '0')");
-		
-			echo $cadastrou;
-		
-		}
-	
-}
-
-?>
-
 
 <html>
 
@@ -39,18 +16,10 @@ if(isset($_POST['inputNome'])){
 
 <script>
 
-function verificaSenha(){
+function myFunction(){
+	alert('Cadastrado');
 	
-var senha = document.getElementByID("inputSenha").value;
-var confSenha = document.getElementByID("inputConfSenha").value;
-	
-if(senha == confSenha){
-	return true;
-}else{
-	return false;
-}
-
-	
+	window.location="index.php";
 }
 
 
@@ -65,7 +34,7 @@ if(senha == confSenha){
 
 <body class=" text-center">
 
-	<form class="form-signin" method="post" action="cad.php" onSubmit="return verficaSenha()">
+	<form class="form-signin" ">
       
 	  <img class="mb-4" src="imgs/logo.jpg" alt="" width="72" height="72">
     
@@ -80,8 +49,8 @@ if(senha == confSenha){
       <input type="password" id="inputPasswordConf" class="form-control" placeholder="Confirmar senha" name="inputConfSenha" required>
       
 	  
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-      <button class="btn btn-lg btn-danger btn-block" type="button" action="">Cancelar</button>
+      <button onclick="myFunction()">Cadastrar</button>
+      
      
 	  <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
     
