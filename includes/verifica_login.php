@@ -1,12 +1,13 @@
 <?php
-session_start();
 
-if(isset($_SESSION["arrUsuario"])){
+include_once("banco_de_dados.php");
+
+if(isset($_SESSION["usuario"])){
 	
-	$arr = "SELECT * FROM jogadores WHERE email='{$_SESSION["arrUsuario"]["email"]}' AND senha='{$_SESSION["arrUsuario"]["senha"]}'";
+	$arr = select("SELECT * FROM jogadores WHERE email='{$_SESSION['usuario']['email']}' && senha='{$_SESSION['usuario']['senha']}'");
 
 	if($arr == 0){
-		header("location:login.php");
+		header("location:cad.php");
 	
 	}else if($_SERVER['PHP_SELF'] == "/challenge/index.php"){
 		header("location:home.php");

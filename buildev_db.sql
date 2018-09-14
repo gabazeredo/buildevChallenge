@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04/09/2018 às 02:39
+-- Tempo de geração: 23/08/2018 às 03:18
 -- Versão do servidor: 5.7.11-log
 -- Versão do PHP: 5.6.15
 
@@ -19,8 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `buildev_db`
 --
-CREATE SCHEMA IF NOT EXISTS `buildev_db` DEFAULT CHARACTER SET utf8 ;
-USE `buildev_db` ;
+
 -- --------------------------------------------------------
 
 --
@@ -47,24 +46,6 @@ CREATE TABLE `alternativas` (
   `questoes_id` int(10) UNSIGNED ZEROFILL NOT NULL COMMENT 'Números identificadores das questões.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabela de dados de alternativas das questões.';
 
---
--- Fazendo dump de dados para tabela `alternativas`
---
-
-INSERT INTO `alternativas` (`id`, `descricao`, `status`, `questoes_id`) VALUES
-(0000000001, 'A', 1, 0000000001),
-(0000000002, 'a', 0, 0000000001),
-(0000000003, 'a', 0, 0000000001),
-(0000000004, 'a', 0, 0000000001),
-(0000000005, 'B', 1, 0000000002),
-(0000000006, 'b', 0, 0000000002),
-(0000000007, 'b', 0, 0000000002),
-(0000000008, 'b', 0, 0000000002),
-(0000000009, 'C', 1, 0000000003),
-(0000000010, 'c', 0, 0000000003),
-(0000000011, 'c', 0, 0000000003),
-(0000000012, 'c', 0, 0000000003);
-
 -- --------------------------------------------------------
 
 --
@@ -88,14 +69,6 @@ CREATE TABLE `fases` (
   `nome` varchar(45) NOT NULL COMMENT 'Nomes das fases.',
   `dificuldade` tinyint(1) UNSIGNED NOT NULL COMMENT 'Níveis de dificuldade das fases. 1=fácil, 2=médio, 3=difícil.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabela de dados das fases.';
-
---
--- Fazendo dump de dados para tabela `fases`
---
-
-INSERT INTO `fases` (`codigo`, `nome`, `dificuldade`) VALUES
-(001, 'xcc', 1),
-(002, 'cvvcd', 1);
 
 -- --------------------------------------------------------
 
@@ -126,6 +99,17 @@ CREATE TABLE `jogadores` (
   `dh_inclusao` datetime NOT NULL COMMENT 'Datas de inclusões dos usuários no sistema.',
   `creditos` smallint(5) UNSIGNED NOT NULL COMMENT 'Créditos que os usuários possuem, utilizados na loja para troca de produtos.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabela de dados dos usuários.';
+
+--
+-- Fazendo dump de dados para tabela `jogadores`
+--
+
+INSERT INTO `jogadores` (`id`, `nome`, `nome_usuario`, `senha`, `nascimento`, `email`, `dh_inclusao`, `creditos`) VALUES
+(1, 'adm', 'gabriel', '123', '2000-03-08', 'g@gmail.com', '2018-08-22 00:00:00', 0),
+(2, 'ag', 'agg', '123', '2000-03-08', '123@gmai.com', '2000-03-08 00:00:00', 0),
+(3, 'ag', 'agg', '123', '2000-03-08', '123@gmai.com', '2000-03-08 00:00:00', 0),
+(4, 'g', '123', '', '2000-01-23', 'asd@fd.com', '2018-08-23 00:00:00', 0),
+(5, 'tggg', 'tgggg', '2018-08-10', '2000-01-23', 'hoooo@gmail.cm', '2018-08-23 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -177,15 +161,6 @@ CREATE TABLE `questoes` (
   `dificuldade` tinyint(1) UNSIGNED NOT NULL COMMENT 'Níveis de dificuldade das fases. 1=fácil, 2=médio, 3=difícil.',
   `fases_codigo` tinyint(3) UNSIGNED ZEROFILL NOT NULL COMMENT 'Códigos de identificação das fases.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabela de dados das questões.';
-
---
--- Fazendo dump de dados para tabela `questoes`
---
-
-INSERT INTO `questoes` (`id`, `enunciado`, `dificuldade`, `fases_codigo`) VALUES
-(0000000001, 'a', 1, 001),
-(0000000002, 'b', 1, 001),
-(0000000003, 'c', 1, 001);
 
 --
 -- Índices de tabelas apagadas
@@ -272,7 +247,7 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de tabela `alternativas`
 --
 ALTER TABLE `alternativas`
-  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'Números identificadores das alternativas.', AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'Números identificadores das alternativas.';
 --
 -- AUTO_INCREMENT de tabela `dicas`
 --
@@ -282,7 +257,7 @@ ALTER TABLE `dicas`
 -- AUTO_INCREMENT de tabela `fases`
 --
 ALTER TABLE `fases`
-  MODIFY `codigo` tinyint(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'Códigos de identificação das fases.', AUTO_INCREMENT=3;
+  MODIFY `codigo` tinyint(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'Códigos de identificação das fases.';
 --
 -- AUTO_INCREMENT de tabela `itens`
 --
@@ -292,7 +267,7 @@ ALTER TABLE `itens`
 -- AUTO_INCREMENT de tabela `jogadores`
 --
 ALTER TABLE `jogadores`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Números identificadores dos usuários.';
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Números identificadores dos usuários.', AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de tabela `logins`
 --
@@ -302,7 +277,7 @@ ALTER TABLE `logins`
 -- AUTO_INCREMENT de tabela `questoes`
 --
 ALTER TABLE `questoes`
-  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'Números identificadores das questões.', AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'Números identificadores das questões.';
 --
 -- Restrições para dumps de tabelas
 --

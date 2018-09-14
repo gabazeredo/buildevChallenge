@@ -1,10 +1,39 @@
+<?php 
+
+include_once("includes/banco_de_dados.php");
+
+if(isset($_POST['inputNome'])){
+
+	$return = select("SELECT * FROM jogadores WHERE email= '{$_POST['inputEmail']}'");
+
+		if($return == 0){
+		
+			date_default_timezone_set('America/Sao_Paulo');
+			$dataReg = date("Y-m-d h:i:");
+			$cadastrou = php_insert("INSERT INTO jogadores VALUES (DEFAULT, '{$_POST['inputNome']}', '{$_POST['inputNomeUsu']}', '{$_POST['inputSenha']}', '{$_POST['inputDate']}', '{$_POST['inputEmail']}', '{$dataReg}', '0')");	
+			echo $cadastrou;
+			
+			header("location:index.php");
+			
+		} else { 
+		
+			echo "<script>alert('E-mail já existente!');</script>";
+			
+		}
+	
+}
+
+?>
+
 
 <html>
 
 <head>
 
+ <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
+
 <meta name="description" content="jogo online "/>
-<meta name="author" content="Gabriel's production"/>
+<meta name="author" content="Rodrigo's production"/>
 <link rel="icon" href="imgs/iconGame.ico">
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css"/>
@@ -16,10 +45,24 @@
 
 <script>
 
-function myFunction(){
-	alert('Cadastrado');
+function verificaSenha(){
+	var senha = document.getElementById("inputPassword").value;
+	var confSenha = document.getElementById("inputPasswordConf").value;
+
+	if(senha == confSenha){
+		return true;
+		
+	}else{
+		alert('Senhas não se correspondem');
+		return false;
+	}
 	
-	window.location="index.php";
+}
+
+function cancelar(){
+	
+	document.location.href="index.php";
+	
 }
 
 
@@ -34,7 +77,7 @@ function myFunction(){
 
 <body class=" text-center">
 
-	<form class="form-signin" ">
+	<form class="form-signin" method="post" action="cad.php" onSubmit="return verificaSenha()">
       
 	  <img class="mb-4" src="imgs/logo.jpg" alt="" width="72" height="72">
     
@@ -42,17 +85,17 @@ function myFunction(){
 		</br>
 		
       <input type="text" id="inputNome" class="form-control" placeholder="Nome" name="inputNome" required autofocus>
-      <input type="text" id="inputNomeUsu" class="form-control" placeholder="Nome de usu�rio" name="inputNomeUsu" required autofocus>
+      <input type="text" id="inputNomeUsu" class="form-control" placeholder="Nome de usuário" name="inputNomeUsu" required autofocus>
       <input type="date" id="dataNasc" class="form-control" name="inputDate" required autofocus>
       <input type="email" id="inputEmail" class="form-control" placeholder="E-mail " name="inputEmail" required autofocus>
       <input type="password" style="margin-bottom:0px;"id="inputPassword" class="form-control" placeholder="Senha" name="inputSenha" required>
       <input type="password" id="inputPasswordConf" class="form-control" placeholder="Confirmar senha" name="inputConfSenha" required>
       
 	  
-      <button onclick="myFunction()">Cadastrar</button>
-      
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
+      <button class="btn btn-lg btn-danger btn-block" type="button" action="" onclick="cancelar()">Cancelar</button>
      
-	  <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+	  <p class="mt-5 mb-3 text-muted">&copy; 2017-2018 Buidev</p>
     
 	</form>
 
