@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 
 include_once("includes/banco_de_dados.php");
 
@@ -9,8 +9,9 @@ if(isset($_POST['inputNome'])){
 		if($return == 0){
 		
 			date_default_timezone_set('America/Sao_Paulo');
-			$dataReg = date("Y-m-d h:i:");
+			$dataReg = date("Y-m-d h:i:s");
 			$cadastrou = php_insert("INSERT INTO jogadores VALUES (DEFAULT, '{$_POST['inputNome']}', '{$_POST['inputNomeUsu']}', '{$_POST['inputSenha']}', '{$_POST['inputDate']}', '{$_POST['inputEmail']}', '{$dataReg}', '0')");	
+			
 			echo $cadastrou;
 			
 			header("location:index.php");
@@ -34,7 +35,7 @@ if(isset($_POST['inputNome'])){
 
 <meta name="description" content="jogo online "/>
 <meta name="author" content="Rodrigo's production"/>
-<link rel="icon" href="imgs/iconGame.ico">
+<link rel="icon" href="imgs/iconeGame.ico">
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css"/>
 <link href="css/signin.css" rel="stylesheet"/>
@@ -79,7 +80,7 @@ function cancelar(){
 
 	<form class="form-signin" method="post" action="cad.php" onSubmit="return verificaSenha()">
       
-	  <img class="mb-4" src="imgs/logo.jpg" alt="" width="72" height="72">
+	  <img class="mb-4" src="imgs/logo.png">
     
     	<h1 class="h3 mb-3 font-weight-normal">Cadastro</h1>    
 		</br>

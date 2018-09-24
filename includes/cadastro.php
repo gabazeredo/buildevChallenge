@@ -1,6 +1,5 @@
-<?php
+﻿<?php
 
-session_start();
 
 include_once("banco_de_dados.php");
 
@@ -13,9 +12,7 @@ if(isset($_POST["inputEmail"])){
 		
 		echo "<script>alert('Usuário e/ou senha incorretos!');</script>";
 	}
-	else{ 
-		
-		$nomeUsu = select("SELECT * FROM jogadores WHERE nome_usuario='{$_POST['inputNomeUsu']}'");
+	else{
 		
 		$usuario = $arr[0];
 		$_SESSION['usuario']    = $usuario;

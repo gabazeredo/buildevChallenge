@@ -1,6 +1,6 @@
 <?php  
 
-
+session_start();
 include_once("includes/cadastro.php");
 //include_once("includes/verifica_login.php");
 
@@ -14,8 +14,8 @@ include_once("includes/cadastro.php");
 <head>
 
 <meta name="description" content="jogo online "/>
-<meta name="author" content="Rodrigo's production"/>
-<link rel="icon" href="imgs/iconGame.ico">
+<meta name="author" content="Gabriel's production"/>
+<link rel="icon" href="imgs/iconeGame.ico">
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css"/>
 <link href="css/signin.css" rel="stylesheet"/>
@@ -42,7 +42,7 @@ document.location.href="cad.php";
 
 	<form class="form-signin" method="post" action="index.php">
       
-	  <img class="mb-4" src="imgs/logo.jpg" alt="" width="72" height="72">
+	  <img class="mb-4" src="imgs/logo.png"></center>
     
     	<h1 class="h3 mb-3 font-weight-normal">Entre com sua conta!</h1>    
 		</br>
@@ -51,11 +51,6 @@ document.location.href="cad.php";
       <input type="email" id="inputEmail" class="form-control" placeholder="E-mail " name="inputEmail" required autofocus>
       <label for="inputPassword" class="sr-only">Senha</label>
       <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="inputSenha" required>
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Lembrar do e-mail
-        </label>
-      </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
 	  <button class="btn btn-lg btn-danger btn-block" type="button" action="" onclick="cadastrarConta()">Cadastrar</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2017-2018 Buildev</p>

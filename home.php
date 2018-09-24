@@ -1,25 +1,36 @@
 <?php
 
+	session_start();
 	
-	include("includes/validacaosessao.php");
+	include_once("includes/validacaosessao.php");
 	
 ?>
-
-<html>
+<!doctype html> 
+<html lang="en">
 
 <head>
 
+<meta charset="UTF-8" />
 <meta name="description" content="jogo online "/>
-<meta name="author" content="Rodrigo's production"/>
-<link rel="icon" href="imgs/iconGame.ico">
+<meta name="author" content="Gabriel's production"/>
+<link rel="icon" href="imgs/iconeGame.ico">
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css"/>
 
-<title>Home</title>
+<title>Buildev</title>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script type="text/javascript" src="js/bootstrap/bootstrap.js"></script>
+<script src="js/phaser.min.js"></script>
+<script src="js/Fase.js"></script>
+<script src="js/GameOver.js"></script>	
+<script src="js/TelaPerguntas.js"></script>	
+<script src="js/TelaPerguntas2.js"></script>	
+<script src="js/TelaPerguntas3.js"></script>	
+<script src="js/TelaInicio.js"></script>	
+<script src="js/TelaInstrucoes.js"></script>	
+<script src="js/TelaParabens.js"></script>	
 
 <script>
 
@@ -30,6 +41,53 @@ document.location.href="includes/deslogar.php";
 }
 
 </script>
+
+<script type="text/javascript">
+
+	var objTelPerguntas = new TelaPerguntas();
+   
+	var pTerminal = 1 //(Math.floor(Math.random() * 10)+1);
+	var sTerminal = 1 //(Math.floor(Math.random() * 10)+1);
+	var tTerminal = 1 //(Math.floor(Math.random() * 10)+1);
+	var verComp1 = 0;
+	var score = 0;
+	var ganharJogo = 0;
+	var vida = 3;
+   
+    var config = {
+        type: Phaser.AUTO,
+        width: 1024,
+        height: 576,
+        
+		physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
+		
+		scene:  [TelaInicio, Fase, TelaPerguntas, objTelPerguntas, TelaInstrucoes, TelaParabens, GameOver]
+    };
+
+    var game = new Phaser.Game(config);
+	game.scene.start(TelaInicio);
+	
+	
+	
+</script>
+
+<style type="text/css">
+	
+		body{
+			margin:0;
+		}
+		canvas{
+			margin: 0 auto;
+			display: block;
+		}
+		
+    </style>
 
 </head>
 
@@ -45,18 +103,17 @@ document.location.href="includes/deslogar.php";
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Perfil <span class="sr-only">(current)</span></a>
-      </li>
-	  <li class="nav-item active">
-        <a class="nav-link" href="#">Ranking <span class="sr-only">(current)</span></a>
-      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-	  <button type="button" class="btn btn-danger" onclick="deslogar()">Sair</button>
+      <button class="btn btn-danger" type="button" onclick="deslogar()">Sair</button>
     </form>
   </div>
 </nav>
+
+
+
+
+
 
 </body>
 
