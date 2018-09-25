@@ -45,10 +45,12 @@ document.location.href="includes/deslogar.php";
 <script type="text/javascript">
 
 	var objTelPerguntas = new TelaPerguntas();
+	var objTelPerguntas2 = new TelaPerguntas2();
+	var objTelPerguntas3 = new TelaPerguntas3();
    
-	var pTerminal = 1 //(Math.floor(Math.random() * 10)+1);
-	var sTerminal = 1 //(Math.floor(Math.random() * 10)+1);
-	var tTerminal = 1 //(Math.floor(Math.random() * 10)+1);
+	var pTerminal = 1 //(Math.floor(Math.random() * 3)+1);
+	var sTerminal = 2 //(Math.floor(Math.random() * 10)+1);
+	var tTerminal = 3 //(Math.floor(Math.random() * 10)+1);
 	var verComp1 = 0;
 	var score = 0;
 	var ganharJogo = 0;
@@ -67,7 +69,7 @@ document.location.href="includes/deslogar.php";
         }
     },
 		
-		scene:  [TelaInicio, Fase, TelaPerguntas, objTelPerguntas, TelaInstrucoes, TelaParabens, GameOver]
+		scene:  [TelaInicio, Fase, TelaPerguntas, objTelPerguntas, TelaPerguntas2, objTelPerguntas2, TelaPerguntas3, objTelPerguntas3, TelaInstrucoes, TelaParabens, GameOver]
     };
 
     var game = new Phaser.Game(config);

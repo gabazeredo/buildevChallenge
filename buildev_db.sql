@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23/08/2018 às 03:18
+-- Tempo de geração: 25/09/2018 às 03:11
 -- Versão do servidor: 5.7.11-log
 -- Versão do PHP: 5.6.15
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `buildev_db`
 --
+CREATE DATABASE IF NOT EXISTS `buildev_db` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `buildev_db`;
 
 -- --------------------------------------------------------
 
@@ -46,6 +48,36 @@ CREATE TABLE `alternativas` (
   `questoes_id` int(10) UNSIGNED ZEROFILL NOT NULL COMMENT 'Números identificadores das questões.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabela de dados de alternativas das questões.';
 
+--
+-- Fazendo dump de dados para tabela `alternativas`
+--
+
+INSERT INTO `alternativas` (`id`, `descricao`, `status`, `questoes_id`) VALUES
+(0000000001, 'FOR', 0, 0000000001),
+(0000000002, 'WHILE', 0, 0000000001),
+(0000000003, 'REPEAT', 0, 0000000001),
+(0000000004, 'IF', 1, 0000000001),
+(0000000005, 'PostgreSQL', 0, 0000000002),
+(0000000006, 'phpMyAmin', 1, 0000000002),
+(0000000007, 'MySQL', 0, 0000000002),
+(0000000008, 'MongoDB', 0, 0000000002),
+(0000000009, '<ul> e <li> ', 1, 0000000003),
+(0000000010, '<ul> e <th>', 0, 0000000003),
+(0000000011, '<title> e <li>', 0, 0000000003),
+(0000000012, '<tr> e <th>', 0, 0000000003),
+(0000000013, 'MONITOR', 0, 0000000004),
+(0000000014, 'TECLADO', 1, 0000000004),
+(0000000015, 'IMPRESSORA', 0, 0000000004),
+(0000000016, 'CAIXA DE SOM', 0, 0000000004),
+(0000000017, 'console.log()', 1, 0000000005),
+(0000000018, 'console.submit()', 0, 0000000005),
+(0000000019, 'console.var()', 0, 0000000005),
+(0000000020, 'console.data()', 0, 0000000005),
+(0000000021, 'HTML', 1, 0000000006),
+(0000000022, 'JAVA', 0, 0000000006),
+(0000000023, 'PHP', 0, 0000000006),
+(0000000024, 'PYTHON', 0, 0000000006);
+
 -- --------------------------------------------------------
 
 --
@@ -69,6 +101,13 @@ CREATE TABLE `fases` (
   `nome` varchar(45) NOT NULL COMMENT 'Nomes das fases.',
   `dificuldade` tinyint(1) UNSIGNED NOT NULL COMMENT 'Níveis de dificuldade das fases. 1=fácil, 2=médio, 3=difícil.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabela de dados das fases.';
+
+--
+-- Fazendo dump de dados para tabela `fases`
+--
+
+INSERT INTO `fases` (`codigo`, `nome`, `dificuldade`) VALUES
+(001, '1', 1);
 
 -- --------------------------------------------------------
 
@@ -105,11 +144,7 @@ CREATE TABLE `jogadores` (
 --
 
 INSERT INTO `jogadores` (`id`, `nome`, `nome_usuario`, `senha`, `nascimento`, `email`, `dh_inclusao`, `creditos`) VALUES
-(1, 'adm', 'gabriel', '123', '2000-03-08', 'g@gmail.com', '2018-08-22 00:00:00', 0),
-(2, 'ag', 'agg', '123', '2000-03-08', '123@gmai.com', '2000-03-08 00:00:00', 0),
-(3, 'ag', 'agg', '123', '2000-03-08', '123@gmai.com', '2000-03-08 00:00:00', 0),
-(4, 'g', '123', '', '2000-01-23', 'asd@fd.com', '2018-08-23 00:00:00', 0),
-(5, 'tggg', 'tgggg', '2018-08-10', '2000-01-23', 'hoooo@gmail.cm', '2018-08-23 00:00:00', 0);
+(1, 'gabriel', 'gabriel', '123', '2001-03-08', 'g@gmail.com', '2018-09-24 07:08:33', 0);
 
 -- --------------------------------------------------------
 
@@ -161,6 +196,18 @@ CREATE TABLE `questoes` (
   `dificuldade` tinyint(1) UNSIGNED NOT NULL COMMENT 'Níveis de dificuldade das fases. 1=fácil, 2=médio, 3=difícil.',
   `fases_codigo` tinyint(3) UNSIGNED ZEROFILL NOT NULL COMMENT 'Códigos de identificação das fases.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabela de dados das questões.';
+
+--
+-- Fazendo dump de dados para tabela `questoes`
+--
+
+INSERT INTO `questoes` (`id`, `enunciado`, `dificuldade`, `fases_codigo`) VALUES
+(0000000001, ' São estruturas de repetição, exceto:', 1, 001),
+(0000000002, 'São exemplos de SGBD, exceto:', 1, 001),
+(0000000003, 'Tags utilizadas para fazer listas ordenadas:', 1, 001),
+(0000000004, 'Qual dos periféricos abaixo é um periférico de entrada de dados?', 1, 001),
+(0000000005, 'Método que permite o envio de dados para o console em JavaScript:', 1, 001),
+(0000000006, 'São linguagens de programação que podem ser usadas na WEB, exceto:', 1, 001);
 
 --
 -- Índices de tabelas apagadas
@@ -247,7 +294,7 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de tabela `alternativas`
 --
 ALTER TABLE `alternativas`
-  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'Números identificadores das alternativas.';
+  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'Números identificadores das alternativas.', AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT de tabela `dicas`
 --
@@ -257,7 +304,7 @@ ALTER TABLE `dicas`
 -- AUTO_INCREMENT de tabela `fases`
 --
 ALTER TABLE `fases`
-  MODIFY `codigo` tinyint(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'Códigos de identificação das fases.';
+  MODIFY `codigo` tinyint(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'Códigos de identificação das fases.', AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de tabela `itens`
 --
@@ -267,7 +314,7 @@ ALTER TABLE `itens`
 -- AUTO_INCREMENT de tabela `jogadores`
 --
 ALTER TABLE `jogadores`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Números identificadores dos usuários.', AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Números identificadores dos usuários.', AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de tabela `logins`
 --
@@ -277,7 +324,7 @@ ALTER TABLE `logins`
 -- AUTO_INCREMENT de tabela `questoes`
 --
 ALTER TABLE `questoes`
-  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'Números identificadores das questões.';
+  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'Números identificadores das questões.', AUTO_INCREMENT=7;
 --
 -- Restrições para dumps de tabelas
 --

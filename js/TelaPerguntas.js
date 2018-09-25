@@ -108,13 +108,14 @@ class TelaPerguntas extends Phaser.Scene{
 		
 		if((objTelPerguntas.alt[id].status) == 1){
 			
-			alert("Certo");
-			score += (15*this.timedEvent.getProgress());
+			alert("RESPOSTA CORRETA!");
+			score += (15/this.timedEvent.getProgress());
 			
 			game.scene.switch('TelaPerguntas', 'Fase');
 			ganharJogo += 1;
 		}else{
-			
+			alert("RESPOSTA INCORRETA!");
+			ganharJogo += 1;
 			vida = vida - 1;
 			game.scene.switch('TelaPerguntas', 'Fase');
 			
@@ -122,6 +123,12 @@ class TelaPerguntas extends Phaser.Scene{
 		}
 	}
 	
+	perdePergunta(){
+		
+		alert("TEMPO ESGOTADO!");
+		game.scene.switch('TelaPerguntas', 'Fase');
+	
+	}
 	
 	
 	

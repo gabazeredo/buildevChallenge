@@ -37,10 +37,10 @@ class TelaPerguntas3 extends Phaser.Scene{
 		this.btnPer3 = this.add.sprite(760, 480, 'btnPer').setInteractive();
 		
 		
-		this.btnPer0.on('pointerdown', () => this.volta(0));
-		this.btnPer1.on('pointerdown', () => this.volta(1));
-		this.btnPer2.on('pointerdown', () => this.volta(2));
-		this.btnPer3.on('pointerdown', () => this.volta(3));
+		this.btnPer0.on('pointerdown', () => this.verificar(0));
+		this.btnPer1.on('pointerdown', () => this.verificar(1));
+		this.btnPer2.on('pointerdown', () => this.verificar(2));
+		this.btnPer3.on('pointerdown', () => this.verificar(3));
 		
 		var tex= this.add.text(70, 70, '3', { fontSize: '24px', fill: '#000' });
 		
@@ -93,7 +93,7 @@ class TelaPerguntas3 extends Phaser.Scene{
 				
 				for(var i=0; i<objTelPerguntas3.arrayPerguntas.length; i++){
 					
-						if((objTelPerguntas3.arrayPerguntas[i].id)== pTerminal){
+						if((objTelPerguntas3.arrayPerguntas[i].id)== tTerminal){
 									
 							var enunciado = objTelPerguntas3.add.text(70, 70, objTelPerguntas3.arrayPerguntas[i].enunciado, { fontSize: '32px', fill: '#000' });
 							break;					
@@ -104,28 +104,30 @@ class TelaPerguntas3 extends Phaser.Scene{
         xmlhttp.open("GET", "js/buscarPerguntas.php?query=SELECT * FROM questoes", true);
         xmlhttp.send();
 	}
-	/*
-	verificaResp(id){
-		
-		if((objTelPerguntas3.alt[id].status) == 1){
-			
-			alert("CErto");
-			score += (15*this.timedEvent.getProgress());
-			debugger;
-			game.scene.switch('TelaPerguntas3', 'Fase');
-		}else{
-			
-			vida = vida - 1;
-			game.scene.switch('TelaPerguntas3', 'Fase');
-		}
 	
+	verificar(id){
+		
+		if((objTelPerguntas.alt[id].status) == 1){
+			
+			alert("RESPOSTA CORRETA!");
+			score += (15/this.timedEvent.getProgress());
+			
+			game.scene.switch('TelaPerguntas', 'Fase');
+			ganharJogo += 1;
+		}else{
+			alert("RESPOSTA INCORRETA!");
+			ganharJogo += 1;
+			vida = vida - 1;
+			game.scene.switch('TelaPerguntas', 'Fase');
+			
+		
+		}
 	}
-	*/
-	volta(){
+	
+	perdePergunta(){
 		
-		ganharJogo += 1;
-		game.scene.switch('TelaPerguntas3', 'Fase');
-		
+		alert("TEMPO ESGOTADO!");
+		game.scene.switch('TelaPerguntas', 'Fase');
 	
 	}
 	

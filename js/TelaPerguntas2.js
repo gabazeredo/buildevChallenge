@@ -38,12 +38,11 @@ class TelaPerguntas2 extends Phaser.Scene{
 		this.btnPer3 = this.add.sprite(760, 480, 'btnPer').setInteractive();
 		
 		
-		this.btnPer0.on('pointerdown', () => this.volta(0));
-		this.btnPer1.on('pointerdown', () => this.volta(1));
-		this.btnPer2.on('pointerdown', () => this.volta(2));
-		this.btnPer3.on('pointerdown', () => this.volta(3));
+		this.btnPer0.on('pointerdown', () => this.verificar(0));
+		this.btnPer1.on('pointerdown', () => this.verificar(1));
+		this.btnPer2.on('pointerdown', () => this.verificar(2));
+		this.btnPer3.on('pointerdown', () => this.verificar(3));
 		
-		var tex= this.add.text(70, 70, '2', { fontSize: '24px', fill: '#000' });
 		
 		this.buscaAlternativas();
 		this.buscaPergunta();
@@ -94,7 +93,7 @@ class TelaPerguntas2 extends Phaser.Scene{
 				
 				for(var i=0; i<objTelPerguntas2.arrayPerguntas.length; i++){
 					
-						if((objTelPerguntas2.arrayPerguntas[i].id)== pTerminal){
+						if((objTelPerguntas2.arrayPerguntas[i].id)== sTerminal){
 									
 							var enunciado = objTelPerguntas2.add.text(70, 70, objTelPerguntas2.arrayPerguntas[i].enunciado, { fontSize: '32px', fill: '#000' });
 							break;					
@@ -105,28 +104,30 @@ class TelaPerguntas2 extends Phaser.Scene{
         xmlhttp.open("GET", "js/buscarPerguntas.php?query=SELECT * FROM questoes", true);
         xmlhttp.send();
 	}
-	/*
-	verificaResp(id){
+	
+	verificar(id){
 		
 		if((objTelPerguntas2.alt[id].status) == 1){
 			
-			alert("CErto");
-			score += (15*this.timedEvent.getProgress());
-			debugger;
-			game.scene.switch('TelaPerguntas2', 'Fase');
-		}else{
+			alert("RESPOSTA CORRETA!");
+			score += (15/this.timedEvent.getProgress());
 			
+			game.scene.switch('TelaPerguntas', 'Fase');
+			ganharJogo += 1;
+		}else{
+			alert("RESPOSTA INCORRETA!");
+			ganharJogo += 1;
 			vida = vida - 1;
-			game.scene.switch('TelaPerguntas2', 'Fase');
+			game.scene.switch('TelaPerguntas', 'Fase');
+			
+		
 		}
-	
 	}
-	*/
-	volta(){
+	
+	perdePergunta(){
 		
-		ganharJogo += 1;
-		game.scene.switch('TelaPerguntas2', 'Fase');
-		
+		alert("TEMPO ESGOTADO!");
+		game.scene.switch('TelaPerguntas', 'Fase');
 	
 	}
 	

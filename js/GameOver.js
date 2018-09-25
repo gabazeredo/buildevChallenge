@@ -12,8 +12,7 @@ class GameOver extends Phaser.Scene{
 	{
 		this.load.image('gameOver', 'recursos/telaGameover.png');
 		this.load.image('btnJogarNov', 'recursos/btnJogarNovamente.png');
-		
-		
+				
 	}
 	
 	create ()

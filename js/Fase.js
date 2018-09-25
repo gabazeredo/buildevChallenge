@@ -129,14 +129,16 @@ class Fase extends Phaser.Scene{
 	
 	}
 	
-	arrumar2(){
-	
+	arrumar2(player, computador2){
+		
+		player.setPosition(580, 355);
 		game.scene.switch('Fase', 'TelaPerguntas2');
 	
 	}
 	
-	arrumar3(){
+	arrumar3(player, computador3){
 	
+		player.setPosition(580, 230);
 		game.scene.switch('Fase', 'TelaPerguntas3');
 	
 	}
@@ -156,11 +158,15 @@ class Fase extends Phaser.Scene{
     update ()
     {
 	
-		if(ganharJogo == 6){
-			
-			score *= (this.timedEvent.getProgress()*10)
-			game.scene.switch('Fase', 'TelaParabens');
+		if(ganharJogo == 3){
+			if(vida <= 0){
+				game.scene.switch('Fase', 'GameOver');
+			}else{
+				score *= (this.timedEvent.getProgress()*10)
+				game.scene.switch('Fase', 'TelaParabens');
+			}
 		}
+		
 		
 		
 		this.tempo.setText('Tempo: ' + (this.timedEvent.getProgress()).toString().substr(0, 4));
