@@ -85,12 +85,12 @@ function cancelar(){
     	<h1 class="h3 mb-3 font-weight-normal">Cadastro</h1>    
 		</br>
 		
-      <input type="text" id="inputNome" class="form-control" placeholder="Nome" name="inputNome" required autofocus>
-      <input type="text" id="inputNomeUsu" class="form-control" placeholder="Nome de usuário" name="inputNomeUsu" required autofocus>
+      <input type="text" id="inputNome" class="form-control" placeholder="Nome" name="inputNome" maxlength="70" required autofocus>
+      <input type="text" id="inputNomeUsu" class="form-control" placeholder="Nome de usuário" name="inputNomeUsu" maxlength="20" required autofocus>
       <input type="date" id="dataNasc" class="form-control" name="inputDate" required autofocus>
-      <input type="email" id="inputEmail" class="form-control" placeholder="E-mail " name="inputEmail" required autofocus>
-      <input type="password" style="margin-bottom:0px;"id="inputPassword" class="form-control" placeholder="Senha" name="inputSenha" required>
-      <input type="password" id="inputPasswordConf" class="form-control" placeholder="Confirmar senha" name="inputConfSenha" required>
+      <input type="email" id="inputEmail" class="form-control" placeholder="E-mail " name="inputEmail" maxlength="90" required autofocus>
+      <input type="password" style="margin-bottom:0px;"id="inputPassword" class="form-control" placeholder="Senha" name="inputSenha" maxlength="32" required>
+      <input type="password" id="inputPasswordConf" class="form-control" placeholder="Confirmar senha" name="inputConfSenha" maxlength="32" required>
       
 	  
       <button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>

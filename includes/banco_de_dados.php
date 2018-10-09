@@ -47,7 +47,7 @@ function php_insert($pQuery){
 
 function sql_delete_update($pQuery){
 
-	$conexao = mysqli_connect("localhost", "root", "root", "senai_teste");
+	$conexao = mysqli_connect("localhost", "root", "root", "buildev_db");
 
 	$dados = mysqli_query($conexao, $pQuery) or die("Sua query retornou um erro");
 

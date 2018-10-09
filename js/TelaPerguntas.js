@@ -42,9 +42,9 @@ class TelaPerguntas extends Phaser.Scene{
 		this.btnPer3.on('pointerdown', () => this.verificar(3));
 		
 	
-		
-		this.buscaAlternativas();
 		this.buscaPergunta();
+		this.buscaAlternativas();
+		
 
 	}
 	
@@ -69,10 +69,10 @@ class TelaPerguntas extends Phaser.Scene{
 					
 					}
 
-				var texto0 = objTelPerguntas.add.text(90, 350, objTelPerguntas.alt[0].descricao, { fontSize: '24px', fill: '#000' });
-				var texto1 = objTelPerguntas.add.text(590, 350, objTelPerguntas.alt[1].descricao, { fontSize: '24px', fill: '#000' });
-				var texto2 = objTelPerguntas.add.text(90, 460, objTelPerguntas.alt[2].descricao, { fontSize: '24px', fill: '#000' });
-				var texto3 = objTelPerguntas.add.text(590, 460, objTelPerguntas.alt[3].descricao, { fontSize: '24px', fill: '#000' });
+				var texto0 = objTelPerguntas.add.text(50, 350, objTelPerguntas.alt[0].descricao, { fontSize: '24px', fill: '#000' });
+				var texto1 = objTelPerguntas.add.text(550, 350, objTelPerguntas.alt[1].descricao, { fontSize: '24px', fill: '#000' });
+				var texto2 = objTelPerguntas.add.text(50, 460, objTelPerguntas.alt[2].descricao, { fontSize: '24px', fill: '#000' });
+				var texto3 = objTelPerguntas.add.text(550, 460, objTelPerguntas.alt[3].descricao, { fontSize: '24px', fill: '#000' });
 				
 			}
         };
@@ -88,6 +88,7 @@ class TelaPerguntas extends Phaser.Scene{
 		
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
+			
 				objTelPerguntas.arrayPerguntas = JSON.parse(this.responseText);
 				
 				for(var i=0; i<objTelPerguntas.arrayPerguntas.length; i++){
@@ -110,13 +111,18 @@ class TelaPerguntas extends Phaser.Scene{
 			
 			alert("RESPOSTA CORRETA!");
 			score += (15/this.timedEvent.getProgress());
+			ganharJogo += 1;
+			pc_status_1 = 1;
 			
 			game.scene.switch('TelaPerguntas', 'Fase');
-			ganharJogo += 1;
+			
 		}else{
 			alert("RESPOSTA INCORRETA!");
+			
+			pc_status_1 = 2;
 			ganharJogo += 1;
 			vida = vida - 1;
+			
 			game.scene.switch('TelaPerguntas', 'Fase');
 			
 		
@@ -126,6 +132,9 @@ class TelaPerguntas extends Phaser.Scene{
 	perdePergunta(){
 		
 		alert("TEMPO ESGOTADO!");
+		pc_status_1 = 2;
+		ganharJogo += 1;
+		vida = vida - 1;
 		game.scene.switch('TelaPerguntas', 'Fase');
 	
 	}

@@ -65,18 +65,26 @@ INSERT INTO `alternativas` (`id`, `descricao`, `status`, `questoes_id`) VALUES
 (0000000010, '<ul> e <th>', 0, 0000000003),
 (0000000011, '<title> e <li>', 0, 0000000003),
 (0000000012, '<tr> e <th>', 0, 0000000003),
-(0000000013, 'MONITOR', 0, 0000000004),
-(0000000014, 'TECLADO', 1, 0000000004),
-(0000000015, 'IMPRESSORA', 0, 0000000004),
-(0000000016, 'CAIXA DE SOM', 0, 0000000004),
-(0000000017, 'console.log()', 1, 0000000005),
-(0000000018, 'console.submit()', 0, 0000000005),
-(0000000019, 'console.var()', 0, 0000000005),
-(0000000020, 'console.data()', 0, 0000000005),
-(0000000021, 'HTML', 1, 0000000006),
-(0000000022, 'JAVA', 0, 0000000006),
-(0000000023, 'PHP', 0, 0000000006),
-(0000000024, 'PYTHON', 0, 0000000006);
+(0000000013, 'JavaWeb', 0, 0000000004),
+(0000000014, 'FastJava', 0, 0000000004),
+(0000000015, 'WebScript', 0, 0000000004),
+(0000000016, 'LiveScript', 1, 0000000004),
+(0000000017, 'Linus Torvalds', 1, 0000000005),
+(0000000018, 'Linus Ubuntu', 0, 0000000005),
+(0000000019, 'Linus Gates', 0, 0000000005),
+(0000000020, 'Linus Pauling', 0, 0000000005),
+(0000000021, 'XHTML',0, 0000000006),
+(0000000022, 'HTML', 0, 0000000006),
+(0000000023, 'XML', 0, 0000000006),
+(0000000024, 'CSS', 1, 0000000006),
+(0000000025, '2008', 0, 0000000007),
+(0000000026, '2009', 1, 0000000007),
+(0000000027, '2005', 0, 0000000007),
+(0000000028, '1998', 0, 0000000007),
+(0000000029, 'Eniac', 1, 0000000008),
+(0000000030, 'MacBook Pro', 0, 0000000008),
+(0000000031, 'Altair 8800', 0, 0000000008),
+(0000000032, 'Harvard Mark I', 0, 0000000008);
 
 -- --------------------------------------------------------
 
@@ -202,12 +210,16 @@ CREATE TABLE `questoes` (
 --
 
 INSERT INTO `questoes` (`id`, `enunciado`, `dificuldade`, `fases_codigo`) VALUES
-(0000000001, ' São estruturas de repetição, exceto:', 1, 001),
+(0000000001, 'São estruturas de repetição, exceto:', 1, 001),
 (0000000002, 'São exemplos de SGBD, exceto:', 1, 001),
 (0000000003, 'Tags utilizadas para fazer listas ordenadas:', 1, 001),
-(0000000004, 'Qual dos periféricos abaixo é um periférico de entrada de dados?', 1, 001),
-(0000000005, 'Método que permite o envio de dados para o console em JavaScript:', 1, 001),
-(0000000006, 'São linguagens de programação que podem ser usadas na WEB, exceto:', 1, 001);
+(0000000004, 'Qual o nome antigo do JavaScript?', 1, 001),
+(0000000005, 'Qual o nome do criador do Linux?', 1, 001),
+(0000000006, 'Linguagens de marcação, exceto:', 1, 001),
+(0000000007, 'Ano de lançamento do Windows 7:', 1, 001),
+(0000000008, 'Qual o nome do primeiro computador digital?', 1, 001);
+
+
 
 --
 -- Índices de tabelas apagadas

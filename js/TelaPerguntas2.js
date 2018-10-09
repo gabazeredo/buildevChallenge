@@ -70,10 +70,11 @@ class TelaPerguntas2 extends Phaser.Scene{
 					
 					}
 
-				var texto0 = objTelPerguntas2.add.text(90, 350, objTelPerguntas2.alt[0].descricao, { fontSize: '24px', fill: '#000' });
-				var texto1 = objTelPerguntas2.add.text(590, 350, objTelPerguntas2.alt[1].descricao, { fontSize: '24px', fill: '#000' });
-				var texto2 = objTelPerguntas2.add.text(90, 460, objTelPerguntas2.alt[2].descricao, { fontSize: '24px', fill: '#000' });
-				var texto3 = objTelPerguntas2.add.text(590, 460, objTelPerguntas2.alt[3].descricao, { fontSize: '24px', fill: '#000' });
+			
+				var texto0 = objTelPerguntas2.add.text(50, 350, objTelPerguntas2.alt[0].descricao, { fontSize: '24px', fill: '#000' });
+				var texto1 = objTelPerguntas2.add.text(550, 350, objTelPerguntas2.alt[1].descricao, { fontSize: '24px', fill: '#000' });
+				var texto2 = objTelPerguntas2.add.text(50, 460, objTelPerguntas2.alt[2].descricao, { fontSize: '24px', fill: '#000' });
+				var texto3 = objTelPerguntas2.add.text(550, 460, objTelPerguntas2.alt[3].descricao, { fontSize: '24px', fill: '#000' });
 				
 			}
         };
@@ -111,14 +112,17 @@ class TelaPerguntas2 extends Phaser.Scene{
 			
 			alert("RESPOSTA CORRETA!");
 			score += (15/this.timedEvent.getProgress());
-			
-			game.scene.switch('TelaPerguntas', 'Fase');
 			ganharJogo += 1;
+			pc_status_2 = 1;
+			
+			game.scene.switch('TelaPerguntas2', 'Fase');
+			
 		}else{
 			alert("RESPOSTA INCORRETA!");
 			ganharJogo += 1;
 			vida = vida - 1;
-			game.scene.switch('TelaPerguntas', 'Fase');
+			pc_status_2 = 2;
+			game.scene.switch('TelaPerguntas2', 'Fase');
 			
 		
 		}
@@ -127,7 +131,10 @@ class TelaPerguntas2 extends Phaser.Scene{
 	perdePergunta(){
 		
 		alert("TEMPO ESGOTADO!");
-		game.scene.switch('TelaPerguntas', 'Fase');
+		ganharJogo += 1;
+		vida = vida - 1;
+		pc_status_2 = 2;
+		game.scene.switch('TelaPerguntas2', 'Fase');
 	
 	}
 	

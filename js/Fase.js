@@ -7,6 +7,9 @@ class Fase extends Phaser.Scene{
 		var computador1;
 		var computador2;
 		var computador3;
+		var coracao1;
+		var coracao3;
+		var coracao2;
 		var scoreText;
 		var placa;
 		var timedEvent;
@@ -25,20 +28,19 @@ class Fase extends Phaser.Scene{
 		this.load.image('placa', 'recursos/placaBtn.png');
 		this.load.image('computador', 'predio/pc.png');
 		this.load.image('computadorCorreto', 'predio/pcCorreto.png');
-		
-		
-		
-		
+		this.load.image('pause', 'recursos/pause.png');
 		this.load.image('fundo', 'predio/fundo_pAndar_'+(Math.floor(Math.random() * 5)+1)+'.png');
 		this.load.image('fundo2', 'predio/fundo_sAndar_'+(Math.floor(Math.random() * 5)+1)+'.png');
 		this.load.image('fundo3', 'predio/fundo_tAndar_'+(Math.floor(Math.random() * 5)+1)+'.png');	
 		this.load.image('andar', 'predio/andar.png');
 		this.load.image('heart', 'recursos/heart.png');
-		this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+		this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 22, frameHeight: 31 });
 		
     }
 
 
+	
+	
 	create ()
     {
 			
@@ -48,6 +50,7 @@ class Fase extends Phaser.Scene{
 		this.add.image(512, 288, 'ceu');
 		this.add.image(512, 288, 'predios');
 		this.placa = this.add.sprite(120, 385, 'placa').setInteractive();
+		this.btnPause = this.add.sprite(512, 32, 'pause').setInteractive();
 		this.add.image(512, 288, 'arbusto');
 		
 		this.platforms = this.physics.add.staticGroup();
@@ -63,25 +66,18 @@ class Fase extends Phaser.Scene{
 		this.platforms.create(512, 263, 'andar');
 		this.platforms.create(512, 138, 'andar');
 		
-	
-		//this.coracao1.create(45, 45, 'heart');
-		//this.coracao2.create(90, 45, 'heart');
-		//this.coracao3.create(135, 45, 'heart');
+		this.coracao1 = this.add.sprite(45, 45, 'heart');
+		this.coracao2 = this.add.sprite(90, 45, 'heart');
+		this.coracao3 = this.add.sprite(135, 45, 'heart');
 	
 
-		this.tempo = this.add.text(50, 32);
-		this.scoreText = this.add.text(850, 32);
+		this.tempo = this.add.text(850, 32);
+		this.scoreText = this.add.text(850, 64);
 	
 		
-		this.computador1 = this.physics.add.staticGroup();
-		this.computador2 = this.physics.add.staticGroup();
-		this.computador3 = this.physics.add.staticGroup();
-		
-		
-		this.computador1.create(605, 475, 'computador');
-		this.computador2.create(620, 350, 'computador');
-		this.computador3.create(610, 225, 'computador');
-	
+		this.computador1 = this.physics.add.sprite(605, 475, 'computador');
+		this.computador2 = this.physics.add.sprite(620, 350, 'computador');
+		this.computador3 = this.physics.add.sprite(610, 225, 'computador');
 		
 		// Jogador
 		
@@ -112,33 +108,43 @@ class Fase extends Phaser.Scene{
             repeat: -1
         });
 		
-		this.physics.add.collider(this.player, this.computador1, this.arrumar1);
-		this.physics.add.collider(this.player, this.computador2, this.arrumar2);
-		this.physics.add.collider(this.player, this.computador3, this.arrumar3);
+		this.physics.add.overlap(this.player, this.computador1, this.arrumar1);
+		this.physics.add.overlap(this.player, this.computador2, this.arrumar2);
+		this.physics.add.overlap(this.player, this.computador3, this.arrumar3);
 		this.physics.add.collider(this.player, this.platforms);
+		this.physics.add.collider(this.computador1, this.platforms);
+		this.physics.add.collider(this.computador2, this.platforms);
+		this.physics.add.collider(this.computador3, this.platforms);
 		this.cursors = this.input.keyboard.createCursorKeys();
 		
 		this.placa.on('pointerdown', () => this.tutorial());
+		this.btnPause.on('pointerdown', () => this.pausar());
 
     }
 	
-	arrumar1(player, computador1 ){
+	pausar(){
+		
+		this.scene.launch('TelaPause');
+		this.scene.pause();
+		
+	}
+	arrumar1(player, computador1){
 	
-		player.setPosition(550, 480);
+		player.setPosition(512, 480);
 		game.scene.switch('Fase', 'TelaPerguntas');
 	
 	}
 	
 	arrumar2(player, computador2){
 		
-		player.setPosition(580, 355);
+		player.setPosition(512, 355);
 		game.scene.switch('Fase', 'TelaPerguntas2');
 	
 	}
 	
 	arrumar3(player, computador3){
 	
-		player.setPosition(580, 230);
+		player.setPosition(512, 230);
 		game.scene.switch('Fase', 'TelaPerguntas3');
 	
 	}
@@ -151,7 +157,10 @@ class Fase extends Phaser.Scene{
 	
 	tutorial(){
 	
-		game.scene.switch('Fase', 'TelaInstrucoes');
+	
+		this.scene.launch('TelaInstrucoes')
+		this.scene.pause();
+		
 	
 	}
 		
@@ -166,11 +175,51 @@ class Fase extends Phaser.Scene{
 				game.scene.switch('Fase', 'TelaParabens');
 			}
 		}
+
+		if(vida == 2){
+			
+			this.coracao3.setVisible(false);
+		}
 		
+		if(vida == 1){
+		
+			this.coracao2.setVisible(false);
+			
+		}
+	
+		if(pc_status_1 == 1){
+			this.computador1.destroy();
+			this.add.image(605, 475, 'computadorCorreto');
+		}
+		
+		if(pc_status_2 == 1){
+			this.computador2.destroy();
+			this.add.image(620, 350, 'computadorCorreto');
+		}
+		
+		if(pc_status_3 == 1){			
+			this.computador3.destroy();
+			this.add.image(610, 225, 'computadorCorreto');
+		}
+		
+		if(pc_status_1 == 2){
+			this.computador1.destroy();
+			this.add.image(605, 475, 'computador');
+		}
+		
+		if(pc_status_2 == 2){
+			this.computador2.destroy();
+			this.add.image(620, 350, 'computador');
+		}
+		
+		if(pc_status_3 == 2){			
+			this.computador3.destroy();
+			this.add.image(610, 225, 'computador');
+		}
 		
 		
 		this.tempo.setText('Tempo: ' + (this.timedEvent.getProgress()).toString().substr(0, 4));
-		this.scoreText.setText('Score: '+ score)
+		this.scoreText.setText('Score: '+ Math.floor(score));
 		
 	
 		if (this.cursors.left.isDown)
@@ -194,7 +243,7 @@ class Fase extends Phaser.Scene{
 
 			if (this.cursors.up.isDown && this.player.body.touching.down)
 			{
-				this.player.setVelocityY(-330);
+				this.player.setVelocityY(-400);
 			}
 			
 			

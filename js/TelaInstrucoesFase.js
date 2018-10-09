@@ -1,8 +1,8 @@
-class TelaInstrucoes extends Phaser.Scene{
+class TelaInstrucoesFase extends Phaser.Scene{
 
 	constructor ()
     {
-        super({key: 'TelaInstrucoes'});
+        super({key: 'TelaInstrucoesFase'});
 		var cursors;
 		var btnVoltarFase;
 	
@@ -12,7 +12,7 @@ class TelaInstrucoes extends Phaser.Scene{
 	{
 		this.load.image('instrucoesdoplayer', 'recursos/tutorial.png');
 		this.load.image('btnVoltarFase', 'recursos/btnSair.png');
-		this.load.image('btnMenu', 'recursos/btnVoltarMenu.png');
+		this.load.image('btnMenu', 'recursos/btnSair.png');
 		
 	}
 	
@@ -22,23 +22,14 @@ class TelaInstrucoes extends Phaser.Scene{
 		
 		this.add.image(512, 288, 'instrucoesdoplayer');
 		
-		this.btnVoltarFase = this.add.sprite(880, 510, 'btnVoltarFase').setInteractive();
-		this.btnMenu = this.add.sprite(670, 510, 'btnMenu').setInteractive();
+		this.btnMenu = this.add.sprite(750, 510, 'btnMenu').setInteractive();
 		
-		this.btnVoltarFase.on('pointerdown', () => this.voltar());
+		
 		this.btnMenu.on('pointerdown', () => this.resetarJogo());
 		
 		
 	}
 	
-	voltar(){
-	
-	
-		this.scene.resume('Fase');
-		this.scene.stop();
-		//game.scene.switch('TelaInstrucoes', 'Fase');
-	
-	}
 	
 	resetarJogo(){
 	

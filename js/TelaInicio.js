@@ -39,7 +39,7 @@ class TelaInicio extends Phaser.Scene{
 	
 	tutorial(){
 	
-		game.scene.switch('TelaInicio', 'TelaInstrucoes');
+		game.scene.switch('TelaInicio', 'TelaInstrucoesFase');
 	
 	}
 	
